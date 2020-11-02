@@ -29,7 +29,7 @@ class Api::V1::QuestionnairesController < ApplicationController
   private
 
   def questionnaire_params
-    params.permit(:name)
+    params.require(:questionnaire).permit(:name, :description)
   end
 
   def find_questionnaire
