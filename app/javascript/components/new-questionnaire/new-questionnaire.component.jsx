@@ -46,7 +46,7 @@ class NewQuestionnaire extends React.Component {
         }
         throw new Error("Network response was not ok.");
       })
-      .then(response => this.props.history.push(`/questionnaires/show/${response.id}`))
+      .then(response => this.props.history.push(`/questionnaires/edit/${response.id}`))
       .catch(error => console.log(error.message));
   }
 
