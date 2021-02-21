@@ -1,0 +1,20 @@
+.hover-border:hover{
+  outline:2px solid black;
+}
+.foucs-border-green:focus {
+  outline: none !important;
+  border:2px solid #008272;
+  box-shadow: 0 0 10px #008272;
+}
+.bg-light-green2{
+  background-color: #f4f4f4;
+}
+.border-dark-green2{
+  border-color: #008272;
+}
+.font-light-green3{
+  color:#6ab0a6
+}
+.h{
+  height:3rem
+}
