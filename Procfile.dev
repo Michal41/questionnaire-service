@@ -1,0 +1,3 @@
+web: PORT=3000 bundle exec puma -C config/puma.rb
+worker: bundle exec sidekiq -q your_uploader
+worker: bundle exec sidekiq -q your_another_uploader

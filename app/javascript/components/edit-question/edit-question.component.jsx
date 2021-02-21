@@ -25,7 +25,10 @@ class EditQuestion extends React.Component {
 
   render() {
     return (
-      <div className="fl w-100 bg-light-green2 bt bw3 border-dark-green2 mt4">
+      <div 
+        className="fl w-100 bg-light-green2 bt bw3 border-dark-green2 mt4"
+        onBlur = {()=> console.log("asd")} 
+      >
         <div className="fl f5 code pa2 tr pl2 mt3">
           1.
         </div>
@@ -38,7 +41,8 @@ class EditQuestion extends React.Component {
             placeholder=" question"
             value={this.state.question}
             className="w-100 h pa2 bn foucs-border-green hover-border"
-            onChange = {this.questionHandleChange} 
+            onChange = {this.questionHandleChange}
+
           />
           
 
