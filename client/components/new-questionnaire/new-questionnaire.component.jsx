@@ -20,9 +20,7 @@ class NewQuestionnaire extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const url = "/api/v1/questionnaires/create";
-    
     const { name, description } = this.state;
-
     if (name.length == 0)
       return;
 
@@ -31,7 +29,6 @@ class NewQuestionnaire extends React.Component {
       description
     };
 
-    const token = document.querySelector('meta[name="csrf-token"]').content;
     fetch(url, {
       method: "POST",
       headers: headers,
