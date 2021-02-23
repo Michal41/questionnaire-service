@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const EditQuestionAnswear = ({...props}) =>{
+const EditAnswear = ({...props}) =>{
   const {answearContent, handleChange, id} = props
   return(
     <div>
@@ -26,4 +26,4 @@ const EditQuestionAnswear = ({...props}) =>{
     </div>
 )}
 
-export default EditQuestionAnswear;
+export default EditAnswear;

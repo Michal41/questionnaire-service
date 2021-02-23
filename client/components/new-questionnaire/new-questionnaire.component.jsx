@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-
+import headers from '../../utilis/apiHealder';
 class NewQuestionnaire extends React.Component {
   constructor(props){
     super(props);
@@ -34,10 +34,7 @@ class NewQuestionnaire extends React.Component {
     const token = document.querySelector('meta[name="csrf-token"]').content;
     fetch(url, {
       method: "POST",
-      headers: {
-        "X-CSRF-Token": token,
-        "Content-Type": "application/json"
-      },
+      headers: headers,
       body: JSON.stringify(body)
     })
       .then(response => {
@@ -48,6 +45,7 @@ class NewQuestionnaire extends React.Component {
       })
       .then(response => this.props.history.push(`/questionnaires/edit/${response.id}`))
       .catch(error => console.log(error.message));
+  
   }
 
   render(){
