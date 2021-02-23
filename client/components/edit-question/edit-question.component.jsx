@@ -27,16 +27,20 @@ class EditQuestion extends React.Component {
     this.setState({answears: answears})
   }
 
+  handleSaveQuestion = () => {
+    console.log('focus out')
+  }
+
   render(){
-    const { handleQuesionComponentClick, questionNumber } = this.props; 
+    const { handleQuesionComponentClick, index } = this.props; 
 
     return (
       <div 
         className="fl w-100 bg-light-green2 bt bw3 border-dark-green2 mt4"
-        onClick={() => handleQuesionComponentClick(questionNumber)}
+        onClick={() => handleQuesionComponentClick(index)}
       >
         <div className="fl f5 code pa2 tr pl2 mt3">
-          {questionNumber + 1}.
+          {index + 1}.
         </div>
 
         <div className="center w-90 relative mt3">
@@ -48,7 +52,7 @@ class EditQuestion extends React.Component {
             value={this.state.question}
             className="w-100 h pa2 bn foucs-border-green hover-border"
             onChange = {this.questionHandleChange}
-            onBlur={()=> console.log('focus out')}
+            onBlur={()=> this.handleSaveQuestion()}
           />
           
 

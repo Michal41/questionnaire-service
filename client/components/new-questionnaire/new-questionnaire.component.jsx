@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import headers from '../../utilis/apiHealder';
+import headers from '../../utilis/apiHeader';
 class NewQuestionnaire extends React.Component {
   constructor(props){
     super(props);

@@ -5,9 +5,9 @@ Rails.application.routes.draw do
       post 'questionnaires/create'
       get 'questionnaires/:id', to:'questionnaires#show'
       delete 'questionnaires/:id', to:'questionnaires#destroy'
+      post 'questions/create', to: 'questions#create'
     end
   end
   root 'homepage#index'
   get '/*path' => 'homepage#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
