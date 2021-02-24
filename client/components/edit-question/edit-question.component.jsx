@@ -27,7 +27,7 @@ class EditQuestion extends React.Component {
     this.setState({answears: answears})
   }
 
-  handleSaveQuestion = () => {
+  handleUpdateQuestion = () => {
     console.log('focus out')
   }
 
@@ -52,7 +52,7 @@ class EditQuestion extends React.Component {
             value={this.state.question}
             className="w-100 h pa2 bn foucs-border-green hover-border"
             onChange = {this.questionHandleChange}
-            onBlur={()=> this.handleSaveQuestion()}
+            onBlur={()=> this.handleUpdateQuestion()}
           />
           
 
