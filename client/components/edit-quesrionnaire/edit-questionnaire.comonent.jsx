@@ -18,7 +18,7 @@ class EditQuestionnaire extends React.Component{
   }
   createQuestion = () => {
     var questionsIds = this.state.questionsIds;
-    const url = "/api/v1/questions/create";
+    const url = "/api/v1/questions";
     const body = {
       questionnaire_id: this.props.match.params.id
     };
@@ -66,6 +66,7 @@ class EditQuestionnaire extends React.Component{
             handleQuesionComponentClick={this.handleQuesionComponentClick} 
             key={index}
             index={index}
+            id={id}
           />
         ))}
         

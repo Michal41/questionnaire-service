@@ -1,4 +1,5 @@
 import React from 'react';
+import headers from '../../utilis/apiHeader';
 import EditQuestionAnswear from '../edit-answear/edit-answear.component';
 
 
@@ -28,7 +29,25 @@ class EditQuestion extends React.Component {
   }
 
   handleUpdateQuestion = () => {
-    console.log('focus out')
+    const url = `/api/v1/questions/${this.props.id}`;
+    const body = {
+      content: this.state.question
+    };
+
+    fetch(url, {
+      method: "PUT",
+      headers: headers,
+      body: JSON.stringify(body)
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => {
+      })
+      .catch(error => console.log(error.message));
   }
 
   render(){

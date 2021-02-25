@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       post 'questionnaires/create'
       get 'questionnaires/:id', to:'questionnaires#show'
       delete 'questionnaires/:id', to:'questionnaires#destroy'
-      post 'questions/create', to: 'questions#create'
+      resources :questions
     end
   end
   root 'homepage#index'
