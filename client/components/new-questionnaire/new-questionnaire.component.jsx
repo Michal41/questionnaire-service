@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-
+import headers from '../../utilis/apiHeader';
 class NewQuestionnaire extends React.Component {
   constructor(props){
     super(props);
@@ -20,9 +20,7 @@ class NewQuestionnaire extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const url = "/api/v1/questionnaires/create";
-    
     const { name, description } = this.state;
-
     if (name.length == 0)
       return;
 
@@ -31,13 +29,9 @@ class NewQuestionnaire extends React.Component {
       description
     };
 
-    const token = document.querySelector('meta[name="csrf-token"]').content;
     fetch(url, {
       method: "POST",
-      headers: {
-        "X-CSRF-Token": token,
-        "Content-Type": "application/json"
-      },
+      headers: headers,
       body: JSON.stringify(body)
     })
       .then(response => {
@@ -48,6 +42,7 @@ class NewQuestionnaire extends React.Component {
       })
       .then(response => this.props.history.push(`/questionnaires/edit/${response.id}`))
       .catch(error => console.log(error.message));
+  
   }
 
   render(){
