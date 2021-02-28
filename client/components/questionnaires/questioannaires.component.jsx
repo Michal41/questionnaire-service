@@ -86,7 +86,7 @@ const mapStateToProps = state => ({ value: state.value })
 const mapDispatchToProps = dispatch => {
   return {
     // dispatching plain actions
-    increment: () => dispatch({ type: 'counter/incremented' }),
+    increment: () => dispatch({ type: 'INCREMENT_ASYNC' }),
     decrement: () => dispatch({ type: 'counter/decremented' }),
   }
 }

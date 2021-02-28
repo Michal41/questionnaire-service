@@ -6,11 +6,12 @@ import Questioannaire from "../components/questionnaire/questionnaire.component"
 import NewQuestionnaire from "../components/new-questionnaire/new-questionnaire.component";
 import EditQuestionnaire from "../components/edit-quesrionnaire/edit-questionnaire.comonent";
 
-
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from "../sagas/root-saga";
 
-
+const sagaMiddleware = createSagaMiddleware()
 function counterReducer(state = { value: 2 }, action) {
   switch (action.type) {
     case 'counter/incremented':
@@ -22,7 +23,11 @@ function counterReducer(state = { value: 2 }, action) {
   }
 }
 
-let store = createStore(counterReducer)
+const store = createStore(
+  counterReducer,
+  applyMiddleware(sagaMiddleware)
+)
+sagaMiddleware.run(rootSaga);
 
 export default (
   <Provider store= {store}>
