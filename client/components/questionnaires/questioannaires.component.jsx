@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {conect, connect} from 'react-redux';
 
 class Questionnaires extends React.Component{
   constructor(props){
@@ -35,6 +36,8 @@ class Questionnaires extends React.Component{
 
     return(
       <div>
+        <div className="ba f2">{this.props.value}</div>
+        <button onClick={this.props.increment}>increment</button>
          <section className="jumbotron jumbotron-fluid text-center">
           <div className="container py-5">
             <h1 className="display-4">Questionnaires list</h1>
@@ -78,4 +81,14 @@ class Questionnaires extends React.Component{
 
 }
 
-export default Questionnaires
+const mapStateToProps = state => ({ value: state.value })
+
+const mapDispatchToProps = dispatch => {
+  return {
+    // dispatching plain actions
+    increment: () => dispatch({ type: 'counter/incremented' }),
+    decrement: () => dispatch({ type: 'counter/decremented' }),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Questionnaires)
