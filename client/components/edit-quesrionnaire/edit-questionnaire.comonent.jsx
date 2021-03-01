@@ -1,57 +1,30 @@
-
 import React from 'react';
-import headers from '../../utilis/apiHeader';
 import EditQuestion from '../edit-question/edit-question.component';
 import "./edit-questionnaire.styles.css"
-
+import {connect} from 'react-redux';
+import { CREATE_QUESTION } from '../../reducers/root-reducer';
 
 class EditQuestionnaire extends React.Component{
   constructor(props){
     super(props);
-    this.state = {
-      questionsIds: []
-    }
   }
 
   componentDidMount(){
-    this.createQuestion();
-  }
-  createQuestion = () => {
-    var questionsIds = this.state.questionsIds;
-    const url = "/api/v1/questions";
-    const body = {
-      questionnaire_id: this.props.match.params.id
-    };
-
-    fetch(url, {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(body)
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Network response was not ok.");
-      })
-      .then(response => {
-        questionsIds.push(response.id)
-        this.setState({questionsIds: questionsIds})
-      })
-      .catch(error => console.log(error.message));
+    const questionnaire_id = this.props.match.params.id
+    this.props.createQuestion(questionnaire_id);
   }
 
   handleQuesionComponentClick = (index) => {
-    if (this.state.questionsIds.length === (index+1)){
-      this.createQuestion();
+    if (this.props.questionsIds.length === (index+1)){
+      const questionnaire_id = this.props.match.params.id
+      this.props.createQuestion(questionnaire_id);
     }
   }
   
   render(){
-    const { questionsIds } = this.state
+    const { questionsIds } = this.props
     return(
       <div>
-    
       <section className="jumbotron jumbotron-fluid text-center">
             <div className="container py-5">
               <h1 className="display-4">Your Questionnaire</h1>
@@ -77,4 +50,11 @@ class EditQuestionnaire extends React.Component{
   }
 }
 
-export default EditQuestionnaire;
+const mapDispatchToProps = dispatch => {
+  return {
+    createQuestion: questionnaire_id => dispatch(CREATE_QUESTION(questionnaire_id))
+  }
+}
+const mapStateToProps = state => ({ questionsIds: state.questionsIds })
+
+export default connect(mapStateToProps,mapDispatchToProps)(EditQuestionnaire);

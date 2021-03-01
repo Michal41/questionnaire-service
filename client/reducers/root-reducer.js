@@ -5,17 +5,17 @@ import rootSaga from "../sagas/root-saga";
 
 export const FETCH_QUESTIONNAIRES = createAction('QUESTIONNAIRES/FETCH-QUESIONNAIRES');
 export const FETCH_QUESTIONNAIRES_SUECCES = createAction('FETCH_QUESTIONNAIRES_SUECCES');
-
+export const CREATE_QUESTION = createAction('QUESTION/CREATE-QUESTION')
+export const CREATE_QUESTION_SUCCES = createAction('QUESTION/CREATE-QUESTION-SUCCES')
 
 const sagaMiddleware = createSagaMiddleware()
-function rootReducer(state = { value: 2, questionnaires:[] }, action) {
+function rootReducer(state = { questionnaires:[], questionsIds: [] }, action) {
   switch (action.type) {
-    case 'counter/incremented':
-      return { value: state.value + 1 }
-    case 'counter/decremented':
-      return { value: state.value - 1 }
     case 'FETCH_QUESTIONNAIRES_SUECCES':
       return {...state, questionnaires: action.payload }
+    case 'QUESTION/CREATE-QUESTION-SUCCES':
+      // console.log(state.questionsIds.push(action.payload.id));
+      return {...state, questionsIds: [...state.questionsIds, action.payload.id]}
     default:
       return state
   }

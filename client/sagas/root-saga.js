@@ -1,9 +1,10 @@
 import { all } from 'redux-saga/effects'
 import FetchQuestionnaires from './fetch-questionnaires'
-import IncrementAsync from './increment-sage'
+import CreateQuestion from './create-question'
+
 export default function* rootSaga() {
   yield all([
-    IncrementAsync(),
     FetchQuestionnaires(),
+    CreateQuestion(),
   ])
 }
