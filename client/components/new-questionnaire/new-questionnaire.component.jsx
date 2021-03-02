@@ -1,6 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import headers from '../../utilis/apiHeader';
+import { connect } from 'react-redux';
+import { CREATE_QUESTIONNAIRE } from '../../reducers/root-reducer';
+
 class NewQuestionnaire extends React.Component {
   constructor(props){
     super(props);
@@ -18,6 +21,7 @@ class NewQuestionnaire extends React.Component {
   }
 
   handleSubmit = (event) => {
+    this.props.createQuestionnaire()
     event.preventDefault();
     const url = "/api/v1/questionnaires/create";
     const { name, description } = this.state;
@@ -28,21 +32,7 @@ class NewQuestionnaire extends React.Component {
       name,
       description
     };
-
-    fetch(url, {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(body)
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Network response was not ok.");
-      })
-      .then(response => this.props.history.push(`/questionnaires/edit/${response.id}`))
-      .catch(error => console.log(error.message));
-  
+    this.props.createQuestionnaire(body)
   }
 
   render(){
@@ -91,6 +81,10 @@ class NewQuestionnaire extends React.Component {
   }
 
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    createQuestionnaire: content => dispatch(CREATE_QUESTIONNAIRE(content))
+  }
+}
 
-
-export default NewQuestionnaire;
+export default connect(null,mapDispatchToProps)(NewQuestionnaire);

@@ -30,10 +30,7 @@ class EditQuestionnaire extends React.Component{
               <h1 className="display-4">Your Questionnaire</h1>
             </div>
       </section>
-      <div className="center w-60">
-  
-  
-        
+      <div className="center w-60">      
         {questionsIds.map( (id,index) => (
           <EditQuestion 
             handleQuesionComponentClick={this.handleQuesionComponentClick} 
@@ -42,8 +39,6 @@ class EditQuestionnaire extends React.Component{
             id={id}
           />
         ))}
-        
-  
       </div>
     </div>
     )
