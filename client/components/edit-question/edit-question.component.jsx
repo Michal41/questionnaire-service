@@ -1,7 +1,8 @@
 import React from 'react';
+import { UPDATE_QUESTION } from '../../reducers/root-reducer';
 import headers from '../../utilis/apiHeader';
 import EditQuestionAnswear from '../edit-answear/edit-answear.component';
-
+import { connect } from 'react-redux';
 
 class EditQuestion extends React.Component {
   constructor() {
@@ -29,25 +30,11 @@ class EditQuestion extends React.Component {
   }
 
   handleUpdateQuestion = () => {
-    const url = `/api/v1/questions/${this.props.id}`;
     const body = {
-      content: this.state.question
+      content: this.state.question,
+      id: this.props.id
     };
-
-    fetch(url, {
-      method: "PUT",
-      headers: headers,
-      body: JSON.stringify(body)
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Network response was not ok.");
-      })
-      .then(response => {
-      })
-      .catch(error => console.log(error.message));
+    this.props.updateQuestion(body)
   }
 
   render(){
@@ -104,6 +91,10 @@ class EditQuestion extends React.Component {
 
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    updateQuestion: content => dispatch(UPDATE_QUESTION(content))
+  }
+}
 
-
-export default EditQuestion;
+export default connect(null,mapDispatchToProps)(EditQuestion);
