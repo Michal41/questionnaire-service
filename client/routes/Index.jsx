@@ -5,15 +5,22 @@ import Questioannaires from "../components/questionnaires/questioannaires.compon
 import Questioannaire from "../components/questionnaire/questionnaire.component";
 import NewQuestionnaire from "../components/new-questionnaire/new-questionnaire.component";
 import EditQuestionnaire from "../components/edit-quesrionnaire/edit-questionnaire.comonent";
+import { Provider } from 'react-redux'
+import store from "../reducers/root-reducer";
 
 
 export default (
-  <Router>
-    <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/questionnaires" exact component={Questioannaires} />
-      <Route path="/questionnaires/edit/:id" exact component={EditQuestionnaire} />
-      <Route path="/questionnaires/new" exact component={NewQuestionnaire} />
-    </Switch>
-  </Router>
+  <Provider store= {store}>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/questionnaires" exact component={Questioannaires} />
+        <Route path="/questionnaires/edit/:id" exact component={EditQuestionnaire} />
+        <Route path="/questionnaires/new" exact component={NewQuestionnaire} />
+      </Switch>
+    </Router>
+  </Provider>
 );
+
+
+

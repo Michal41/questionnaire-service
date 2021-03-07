@@ -27,7 +27,7 @@ class Questionnaire extends React.Component{
 
     return(
       <div>
-        single quesstionnairesd
+        single quesstionnaire
         <span>
           {this.state.Questionnaire.name}
         </span>
