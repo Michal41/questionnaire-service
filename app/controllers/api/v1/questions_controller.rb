@@ -1,5 +1,11 @@
 class Api::V1::QuestionsController < ApplicationController
   protect_from_forgery except: :create
+  
+  def index
+    result = Questionnaire.find(params[:questionnaire_id]).questions
+    render json: result
+  end
+  
   def create
     question = Question.create(question_params)
     render :json => question

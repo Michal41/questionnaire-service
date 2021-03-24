@@ -10,11 +10,11 @@ const fetchFunc = ({ url, options }) => {
 function* UpdateQuestionFlow(action) {
   const {content, id} = action.payload
   const body = {content: content}
-  const url = `/api/v1/questions/${id}`;
+  const url = `/api/v1/questionnaires/1/questions/${id}`;
   const response = yield call(fetchFunc, {
     url: url,
     options : {
-      method : 'PUT',
+      method : 'PATCH',
       headers : headers,
       body : JSON.stringify(body),
     }

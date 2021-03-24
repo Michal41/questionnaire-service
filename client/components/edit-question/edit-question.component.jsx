@@ -5,10 +5,10 @@ import EditQuestionAnswear from '../edit-answear/edit-answear.component';
 import { connect } from 'react-redux';
 
 class EditQuestion extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      question: "",
+      question: props.content,
       answears:[{content:""},{content:""}]
     }
   }
@@ -32,6 +32,7 @@ class EditQuestion extends React.Component {
   handleUpdateQuestion = () => {
     const body = {
       content: this.state.question,
+      answears: this.state.answears,
       id: this.props.id
     };
     this.props.updateQuestion(body)
@@ -39,18 +40,16 @@ class EditQuestion extends React.Component {
 
   render(){
     const { handleQuesionComponentClick, index } = this.props; 
-
     return (
       <div 
         className="fl w-100 bg-light-green2 bt bw3 border-dark-green2 mt4"
         onClick={() => handleQuesionComponentClick(index)}
+        onBlur={()=> this.handleUpdateQuestion()}
       >
         <div className="fl f5 code pa2 tr pl2 mt3">
           {index + 1}.
         </div>
-
         <div className="center w-90 relative mt3">
-
           <input
             name='question'
             type='text'
@@ -58,23 +57,16 @@ class EditQuestion extends React.Component {
             value={this.state.question}
             className="w-100 h pa2 bn foucs-border-green hover-border"
             onChange = {this.questionHandleChange}
-            onBlur={()=> this.handleUpdateQuestion()}
           />
           
-
-
           {this.state.answears.map(answear => (
             <EditQuestionAnswear 
               key={this.state.answears.indexOf(answear)}
               answearContent={answear.content}
               handleChange={this.answearHandleCHange} 
               id={this.state.answears.indexOf(answear)}
-
             />
             ))}
-
-
-
 
         </div>
         <div className="fl w-100"></div>
