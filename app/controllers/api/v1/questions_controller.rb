@@ -12,6 +12,11 @@ class Api::V1::QuestionsController < ApplicationController
   end
 
   def update
+    if params[:answers].length!=0
+      params[:answers].each do |answer|
+        Answer.find(answer[:id]).update(content: answer[:content])
+      end
+    end
     question = Question.find(params[:id])
     if question.update(question_params)
       render :json => question
@@ -23,6 +28,6 @@ class Api::V1::QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:questionnaire_id, :content)
+    params.require(:question).permit(:questionnaire_id, :content, :answers)
   end
 end

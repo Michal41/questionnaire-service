@@ -24,7 +24,6 @@ class EditQuestionnaire extends React.Component{
 
   render(){
     const { questions } = this.props
-    console.log(questions)
     return(
       <div>
       <section className="jumbotron jumbotron-fluid text-center">
@@ -40,6 +39,7 @@ class EditQuestionnaire extends React.Component{
             index={index}
             id={item.id}
             content={item.content}
+            answers={item.answers}
           />
         ))}
       </div>

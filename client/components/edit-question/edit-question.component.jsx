@@ -9,7 +9,7 @@ class EditQuestion extends React.Component {
     super(props);
     this.state = {
       question: props.content,
-      answears:[{content:""},{content:""}]
+      answers:[...props.answers]
     }
   }
   questionHandleChange = (event) => {
@@ -19,20 +19,22 @@ class EditQuestion extends React.Component {
   }
 
   answearHandleCHange = (event,key) => {
-    const answears = this.state.answears;
-    answears[key] = {content:event.target.value}
-    this.setState({answears:answears})
+    const answers = this.state.answers;
+    console.log(key)
+    answers[key] = {id:answers[key].id, content:event.target.value}
+    this.setState({answers:answers})
   } 
   handleAddAnswear = () => {
-    const answears = this.state.answears;
-    answears.push({content:''})
-    this.setState({answears: answears})
+    const answers = this.state.answers;
+    answers.push({content:''})
+    this.setState({answers: answers})
   }
 
   handleUpdateQuestion = () => {
+    console.log(this.state.answers)
     const body = {
       content: this.state.question,
-      answears: this.state.answears,
+      answers: this.state.answers,
       id: this.props.id
     };
     this.props.updateQuestion(body)
@@ -59,12 +61,12 @@ class EditQuestion extends React.Component {
             onChange = {this.questionHandleChange}
           />
           
-          {this.state.answears.map(answear => (
+          {this.state.answers.map(answer => (
             <EditQuestionAnswear 
-              key={this.state.answears.indexOf(answear)}
-              answearContent={answear.content}
+              key={this.state.answers.indexOf(answer)}
+              answearContent={answer.content}
               handleChange={this.answearHandleCHange} 
-              id={this.state.answears.indexOf(answear)}
+              id={this.state.answers.indexOf(answer)}
             />
             ))}
 
