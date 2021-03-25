@@ -8,18 +8,20 @@ const fetchFunc = ({ url, options }) => {
 }
 
 function* CreateAnswerFlow(action) {
+  //api/v1/questionnaires/1/questions/1/answers
+  console.log('log from saga')
+  console.log(action)
   const url = `/api/v1/questions/${action.payload}/answers`;
 
-
-  const response = yield call(fetchFunc, {
-    url: url,
-    options : {
-       method : 'POST',
-       headers : headers,
-   }
-  });
-  const data = yield response.json();
-  yield put(CREATE_ANSWER_SUCCES(data));
+  // const response = yield call(fetchFunc, {
+  //   url: url,
+  //   options : {
+  //      method : 'POST',
+  //      headers : headers,
+  //  }
+  // });
+  // const data = yield response.json();
+  // yield put(CREATE_ANSWER_SUCCES(data));
 }
 
 function* CreateAnswer() {

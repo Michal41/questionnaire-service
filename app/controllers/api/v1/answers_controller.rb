@@ -1,8 +1,8 @@
 class Api::V1::AnswersController < ApplicationController
   protect_from_forgery except: :create
   def create
-    question = Question.create(question_params)
-    render :json => question
+    answer = Answer.create(question_id: params[:question_id], content: 'from controller' )
+    render :json => answer
   end
 
   def update

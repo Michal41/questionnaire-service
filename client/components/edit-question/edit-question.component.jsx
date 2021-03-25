@@ -1,5 +1,5 @@
 import React from 'react';
-import { UPDATE_QUESTION } from '../../reducers/root-reducer';
+import { CREATE_ANSWER, UPDATE_QUESTION } from '../../reducers/root-reducer';
 import headers from '../../utilis/apiHeader';
 import EditQuestionAnswear from '../edit-answear/edit-answear.component';
 import { connect } from 'react-redux';
@@ -20,22 +20,25 @@ class EditQuestion extends React.Component {
 
   answearHandleCHange = (event,key) => {
     const answers = this.state.answers;
-    console.log(key)
     answers[key] = {id:answers[key].id, content:event.target.value}
     this.setState({answers:answers})
   } 
   handleAddAnswear = () => {
-    const answers = this.state.answers;
-    answers.push({content:''})
-    this.setState({answers: answers})
+    // const answers = this.state.answers;
+    // answers.push({content:''})
+    // this.setState({answers: answers})
+    
+    this.props.addAnswer('123');
+    const questionnaire_id = this.props.match.params.id
   }
 
   handleUpdateQuestion = () => {
-    console.log(this.state.answers)
+    const questionnaire_id = this.props.match.params.id
     const body = {
       content: this.state.question,
       answers: this.state.answers,
-      id: this.props.id
+      questionId: this.props.id,
+      questionnaire_id: questionnaire_id,
     };
     this.props.updateQuestion(body)
   }
@@ -79,15 +82,14 @@ class EditQuestion extends React.Component {
           </div>
         </div>
       </div>
-
     )
   }
-
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateQuestion: content => dispatch(UPDATE_QUESTION(content))
+    updateQuestion: content => dispatch(UPDATE_QUESTION(content)),
+    addAnswer: params => dispatch(CREATE_ANSWER(params)),
   }
 }
 

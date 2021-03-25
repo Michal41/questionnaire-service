@@ -40,6 +40,8 @@ class EditQuestionnaire extends React.Component{
             id={item.id}
             content={item.content}
             answers={item.answers}
+            match={this.props.match}
+
           />
         ))}
       </div>

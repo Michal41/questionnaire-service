@@ -8,9 +8,9 @@ const fetchFunc = ({ url, options }) => {
 }
 
 function* UpdateQuestionFlow(action) {
-  const {content, id, answers} = action.payload
+  const {content, questionId, answers, questionnaire_id} = action.payload
   const body = {content: content, answers}
-  const url = `/api/v1/questionnaires/1/questions/${id}`;
+  const url = `/api/v1/questionnaires/${questionnaire_id}/questions/${questionId}`;
   const response = yield call(fetchFunc, {
     url: url,
     options : {

@@ -11,6 +11,10 @@ export const CREATE_QUESTIONNAIRE = createAction('QUESTIONNAIRE/CREATE-QUESTIONN
 export const UPDATE_QUESTION = createAction('QUESTION/UPDATE-QUESTION')
 export const FETCH_QUESTIONS = createAction('QUESTIONS/FETCH-QUESIONS');
 export const FETCH_QUESTIONS_SUECCES = createAction('QUESTIONS/FETCH_QUESTIONS_SUECCES');
+export const CREATE_ANSWER = createAction('ANSWER/CREATE-ANSWER');
+export const CREATE_ANSWER_SUCCES = createAction('ANSWER/CREATE-ANSWER_SUCCES');
+
+
 
 const sagaMiddleware = createSagaMiddleware()
 function rootReducer(state = { questionnaires:[], questions:[], questionsIds: [], answers: [] }, action) {

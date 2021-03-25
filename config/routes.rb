@@ -6,9 +6,10 @@ Rails.application.routes.draw do
       # get 'questionnaires/:id', to:'questionnaires#show'
       # delete 'questionnaires/:id', to:'questionnaires#destroy'
       resources :questionnaires do
-        resources :questions
+        resources :questions do
+          resources :answers
+        end
       end
-      resources :answers
     end
   end
   root 'homepage#index'
