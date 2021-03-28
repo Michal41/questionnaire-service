@@ -24,12 +24,12 @@ class EditQuestion extends React.Component {
     this.setState({answers:answers})
   } 
   handleAddAnswear = () => {
-    // const answers = this.state.answers;
-    // answers.push({content:''})
-    // this.setState({answers: answers})
-    
-    this.props.addAnswer('123');
     const questionnaire_id = this.props.match.params.id
+    const body = {
+      questionId: this.props.id,
+      questionnaire_id: questionnaire_id,
+    };
+    this.props.addAnswer(body);
   }
 
   handleUpdateQuestion = () => {
@@ -63,12 +63,11 @@ class EditQuestion extends React.Component {
             className="w-100 h pa2 bn foucs-border-green hover-border"
             onChange = {this.questionHandleChange}
           />
-          
-          {this.state.answers.map(answer => (
+          {this.props.answers.map(answer => (
             <EditQuestionAnswear 
-              key={this.state.answers.indexOf(answer)}
+              key={answer.id}
               answearContent={answer.content}
-              handleChange={this.answearHandleCHange} 
+              handleChange={this.answearHandleCHange}
               id={this.state.answers.indexOf(answer)}
             />
             ))}

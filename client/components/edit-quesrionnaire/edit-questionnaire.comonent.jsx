@@ -13,6 +13,10 @@ class EditQuestionnaire extends React.Component{
     const questionnaire_id = this.props.match.params.id
     this.props.FetchQuestions(questionnaire_id)
   }
+  componentWillReceiveProps(){
+    console.log('fdsfs')
+    this.forceUpdate()
+  }
 
   handleQuesionComponentClick = (index) => {
     const questionsIds = this.props.questions.map(q => q.id )
@@ -24,6 +28,7 @@ class EditQuestionnaire extends React.Component{
 
   render(){
     const { questions } = this.props
+    const sortedQuestions = questions.sort((a, b) => (a.id > b.id) ? 1 : -1);
     return(
       <div>
       <section className="jumbotron jumbotron-fluid text-center">
@@ -32,15 +37,16 @@ class EditQuestionnaire extends React.Component{
             </div>
       </section>
       <div className="center w-60">      
-        {questions.map( (item,index) => (
+        {sortedQuestions.map( (item,index) => (
           <EditQuestion 
             handleQuesionComponentClick={this.handleQuesionComponentClick} 
-            key={index}
             index={index}
+            key={item.id}
             id={item.id}
             content={item.content}
             answers={item.answers}
             match={this.props.match}
+            lastAnswer={item.answers[item.answers.length -1 ]}
 
           />
         ))}
