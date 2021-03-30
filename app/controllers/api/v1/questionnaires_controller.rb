@@ -1,11 +1,11 @@
 class Api::V1::QuestionnairesController < ApplicationController
   def index
-    questionnaires = Questionnaire.all()
+    questionnaires = current_user.questionnaires
     render json:questionnaires
   end
 
   def create
-    questionnaire=Questionnaire.create!(questionnaire_params)
+    questionnaire=current_user.questionnaires.create(questionnaire_params)
     if questionnaire
       questionnaire.questions.create
       render json:questionnaire
