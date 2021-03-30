@@ -3,7 +3,8 @@ import FetchQuestionnaires from './fetch-questionnaires'
 import CreateQuestion from './create-question'
 import CreateQuestionnaire from './create-questionnaire'
 import UpdateQuestion from './update-question'
-
+import FetchQuestions from './fetch-questions'
+import CreateAnswer from './create-answer'
 
 export default function* rootSaga() {
   yield all([
@@ -11,5 +12,7 @@ export default function* rootSaga() {
     CreateQuestion(),
     CreateQuestionnaire(),
     UpdateQuestion(),
+    CreateAnswer(),
+    FetchQuestions(),
   ])
 }

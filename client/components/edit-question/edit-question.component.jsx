@@ -1,100 +1,77 @@
 import React from 'react';
-import { UPDATE_QUESTION } from '../../reducers/root-reducer';
+import { CREATE_ANSWER, HANDLE_ANSWER_CHANGE, HANDLE_QUESTION_CHANGE, UPDATE_QUESTION } from '../../reducers/root-reducer';
 import headers from '../../utilis/apiHeader';
 import EditQuestionAnswear from '../edit-answear/edit-answear.component';
 import { connect } from 'react-redux';
 
-class EditQuestion extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      question: "",
-      answears:[{content:""},{content:""}]
-    }
-  }
-  questionHandleChange = (event) => {
-    this.setState({
-      [event.target.name]:event.target.value
-    })
-  }
+const EditQuestion = (props) => {
+  const { handleQuesionComponentClick, index } = props; 
+  const answers = props.answers.sort((a, b) => (a.id > b.id) ? 1 : -1);
 
-  answearHandleCHange = (event,key) => {
-    const answears = this.state.answears;
-    answears[key] = {content:event.target.value}
-    this.setState({answears:answears})
-  } 
-  handleAddAnswear = () => {
-    const answears = this.state.answears;
-    answears.push({content:''})
-    this.setState({answears: answears})
-  }
-
-  handleUpdateQuestion = () => {
+  const handleAddAnswear = () => {
+    const questionnaire_id = props.match.params.id
     const body = {
-      content: this.state.question,
-      id: this.props.id
+      questionId: props.id,
+      questionnaire_id: questionnaire_id,
     };
-    this.props.updateQuestion(body)
+    props.addAnswer(body);
   }
 
-  render(){
-    const { handleQuesionComponentClick, index } = this.props; 
-
-    return (
-      <div 
-        className="fl w-100 bg-light-green2 bt bw3 border-dark-green2 mt4"
-        onClick={() => handleQuesionComponentClick(index)}
-      >
-        <div className="fl f5 code pa2 tr pl2 mt3">
-          {index + 1}.
-        </div>
-
-        <div className="center w-90 relative mt3">
-
-          <input
-            name='question'
-            type='text'
-            placeholder=" question"
-            value={this.state.question}
-            className="w-100 h pa2 bn foucs-border-green hover-border"
-            onChange = {this.questionHandleChange}
-            onBlur={()=> this.handleUpdateQuestion()}
+  const handleUpdateQuestion = () => {
+    const questionnaire_id = props.match.params.id
+    const body = {
+      content: props.content,
+      answers: props.answers,
+      questionId: props.id,
+      questionnaire_id: questionnaire_id,
+    };
+    props.updateQuestion(body)
+  }
+  return (
+    <div 
+      className="fl w-100 bg-light-green2 bt bw3 border-dark-green2 mt4"
+      onClick={() => handleQuesionComponentClick(index)}
+      onBlur={()=> handleUpdateQuestion()}
+    >
+      <div className="fl f5 code pa2 tr pl2 mt3">
+        {index + 1}.
+      </div>
+      <div className="center w-90 relative mt3">
+        <input
+          name='question'
+          type='text'
+          placeholder=" question"
+          value={props.content}
+          className="w-100 h pa2 bn foucs-border-green hover-border"
+          onChange = {(event) => props.handleQuestionChange({ event, questionId: props.id })}
+        />
+        {answers.map(answer => (
+          <EditQuestionAnswear 
+            key={answer.id}
+            answearContent={answer.content}
+            answerId={answer.id}
+            questionId={props.id}
           />
-          
+          ))}
 
-
-          {this.state.answears.map(answear => (
-            <EditQuestionAnswear 
-              key={this.state.answears.indexOf(answear)}
-              answearContent={answear.content}
-              handleChange={this.answearHandleCHange} 
-              id={this.state.answears.indexOf(answear)}
-
-            />
-            ))}
-
-
-
-
-        </div>
-        <div className="fl w-100"></div>
-        <div onClick = {this.handleAddAnswear} className="fl pl3 pointer dim">
-          <div className='flex items-center'>
-            <div className="fl f2 pa2 b font-light-green3 dim">&#43;</div>
-            <div className="fl black-70 f4 mt1">Add options</div>
-          </div>
+      </div>
+      <div className="fl w-100"></div>
+      <div onClick = {handleAddAnswear} className="fl pl3 pointer dim">
+        <div className='flex items-center'>
+          <div className="fl f2 pa2 b font-light-green3 dim">&#43;</div>
+          <div className="fl black-70 f4 mt1">Add options</div>
         </div>
       </div>
-
-    )
-  }
-
-}
-
+    </div>
+  )  
+};
 const mapDispatchToProps = dispatch => {
   return {
-    updateQuestion: content => dispatch(UPDATE_QUESTION(content))
+    updateQuestion: content => dispatch(UPDATE_QUESTION(content)),
+    addAnswer: params => dispatch(CREATE_ANSWER(params)),
+    handleQuestionChange: params => dispatch(HANDLE_QUESTION_CHANGE(params)),
   }
 }
+
 
 export default connect(null,mapDispatchToProps)(EditQuestion);

@@ -1,8 +1,9 @@
 import React from 'react'
-
+import { connect } from 'react-redux'
+import { HANDLE_ANSWER_CHANGE } from '../../reducers/root-reducer'
 
 const EditAnswear = ({...props}) =>{
-  const {answearContent, handleChange, id} = props
+  const {answearContent, handleChange,handleAnswerChange, answerId, questionId} = props
   return(
     <div>
       <div className="fl w-100 h1 mt1"></div>
@@ -16,7 +17,7 @@ const EditAnswear = ({...props}) =>{
           placeholder=" answear"
           className="w-100 h bn foucs-border-green hover-border pa2"
           value={answearContent}
-          onChange={(event) => handleChange(event,id)}
+          onChange={(event) => handleAnswerChange({answerId, questionId, event})}
         >
         </input>
       </div>
@@ -25,5 +26,9 @@ const EditAnswear = ({...props}) =>{
       </div>
     </div>
 )}
-
-export default EditAnswear;
+const mapDispatchToProps = dispatch => {
+  return {
+    handleAnswerChange: params => dispatch(HANDLE_ANSWER_CHANGE(params)),
+  }
+}
+export default connect(null,mapDispatchToProps)(EditAnswear);

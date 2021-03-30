@@ -7,6 +7,7 @@ class Api::V1::QuestionnairesController < ApplicationController
   def create
     questionnaire=Questionnaire.create!(questionnaire_params)
     if questionnaire
+      questionnaire.questions.create
       render json:questionnaire
     else
       render json:questionnaire.errors

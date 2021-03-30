@@ -9,7 +9,7 @@ const fetchFunc = ({ url, options }) => {
 function* CreateQuestionnaireFlow(action) {
   if (action.payload) {
     const {name, description} = action.payload;
-    const url = "/api/v1/questionnaires/create";
+    const url = "/api/v1/questionnaires";
     const body = {
       name,
       description

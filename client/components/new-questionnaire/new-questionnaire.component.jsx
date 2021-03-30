@@ -27,7 +27,6 @@ class NewQuestionnaire extends React.Component {
     const { name, description } = this.state;
     if (name.length == 0)
       return;
-
     const body = {
       name,
       description

@@ -7,7 +7,7 @@ const fetchFunc = ({ url, options }) => {
 }
 
 function* CreateQuestionFlow(action) {
-  const url = "/api/v1/questions";
+  const url = `/api/v1/questionnaires/${action.payload}/questions`;
   const body = {
     questionnaire_id: action.payload
   };
