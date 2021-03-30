@@ -34,3 +34,7 @@
   width: 100%;
   opacity: 0.4;
 }
+.device-container{
+  max-width: 541px;
+  margin: auto;
+}
