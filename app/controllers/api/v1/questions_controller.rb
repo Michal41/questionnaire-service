@@ -2,8 +2,7 @@ class Api::V1::QuestionsController < ApplicationController
   protect_from_forgery except: :create
   
   def index
-    result = Questionnaire.find(params[:questionnaire_id]).questions
-    render json: result
+    render json: questions
   end
   
   def create
@@ -27,6 +26,11 @@ class Api::V1::QuestionsController < ApplicationController
 
   private
 
+  def questions
+    @questionnaire ||= Questionnaire.find(params[:questionnaire_id])
+    @questions ||= @questionnaire.questions
+    return @questions if current_user.id== @questionnaire.id
+  end
   def question_params
     params.require(:question).permit(:questionnaire_id, :content, :answers)
   end
