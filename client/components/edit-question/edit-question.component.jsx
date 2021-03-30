@@ -1,5 +1,5 @@
 import React from 'react';
-import { CREATE_ANSWER, HANDLE_ANSWER_CHANGE, UPDATE_QUESTION } from '../../reducers/root-reducer';
+import { CREATE_ANSWER, HANDLE_ANSWER_CHANGE, HANDLE_QUESTION_CHANGE, UPDATE_QUESTION } from '../../reducers/root-reducer';
 import headers from '../../utilis/apiHeader';
 import EditQuestionAnswear from '../edit-answear/edit-answear.component';
 import { connect } from 'react-redux';
@@ -12,17 +12,17 @@ class EditQuestion extends React.Component {
       answers:[...props.answers]
     }
   }
-  questionHandleChange = (event) => {
-    this.setState({
-      [event.target.name]:event.target.value
-    })
-  }
-  answearHandleCHange = (event,key) => {
-    console.log(key)
-    const answers = this.state.answers;
-    answers[key] = {id:answers[key].id, content:event.target.value}
-    this.setState({answers:answers})
-  } 
+  // questionHandleChange = (event) => {
+  //   this.setState({
+  //     [event.target.name]:event.target.value
+  //   })
+  // }
+  // answearHandleCHange = (event,key) => {
+  //   console.log(key)
+  //   const answers = this.state.answers;
+  //   answers[key] = {id:answers[key].id, content:event.target.value}
+  //   this.setState({answers:answers})
+  // } 
   handleAddAnswear = () => {
     const questionnaire_id = this.props.match.params.id
     const body = {
@@ -60,9 +60,9 @@ class EditQuestion extends React.Component {
             name='question'
             type='text'
             placeholder=" question"
-            value={this.state.question}
+            value={this.props.content}
             className="w-100 h pa2 bn foucs-border-green hover-border"
-            onChange = {this.handleAnswerChange}
+            onChange = {(event) => this.props.handleQuestionChange({ event, questionId:this.props.id })}
           />
           {answers.map(answer => (
             <EditQuestionAnswear 
@@ -91,8 +91,9 @@ const mapDispatchToProps = dispatch => {
   return {
     updateQuestion: content => dispatch(UPDATE_QUESTION(content)),
     addAnswer: params => dispatch(CREATE_ANSWER(params)),
-    handleAnswerChange: params => dispatch(HANDLE_ANSWER_CHANGE(params)),
+    handleQuestionChange: params => dispatch(HANDLE_QUESTION_CHANGE(params)),
   }
 }
+
 
 export default connect(null,mapDispatchToProps)(EditQuestion);

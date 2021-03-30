@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { createAction } from 'redux-actions'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from "../sagas/root-saga";
-import {handleAnswerChange} from './utilis';
+import {handleAnswerChange, handleQuestionChange} from './utilis';
 
 export const FETCH_QUESTIONNAIRES = createAction('QUESTIONNAIRES/FETCH-QUESIONNAIRES');
 export const FETCH_QUESTIONNAIRES_SUECCES = createAction('FETCH_QUESTIONNAIRES_SUECCES');
@@ -15,6 +15,7 @@ export const FETCH_QUESTIONS_SUECCES = createAction('QUESTIONS/FETCH_QUESTIONS_S
 export const CREATE_ANSWER = createAction('ANSWER/CREATE-ANSWER');
 export const CREATE_ANSWER_SUCCES = createAction('ANSWER/CREATE-ANSWER_SUCCES');
 export const HANDLE_ANSWER_CHANGE = createAction('ANSWER/HANDLE-CHANGE');
+export const HANDLE_QUESTION_CHANGE = createAction('QUESTION/HANDLE-CHANGE');
 
 
 
@@ -29,6 +30,8 @@ function rootReducer(state = { questionnaires:[], questions:[], questionsIds: []
       return {...state, questions:[...action.payload]}
     case 'ANSWER/HANDLE-CHANGE':
       return handleAnswerChange(state, action.payload)
+    case 'QUESTION/HANDLE-CHANGE':
+      return handleQuestionChange(state, action.payload)
     case 'ANSWER/CREATE-ANSWER_SUCCES':
       const anotherQuestions = state.questions.filter(question => question.id!=action.payload.question.id)
       const question = state.questions.filter(question => question.id==action.payload.question.id)

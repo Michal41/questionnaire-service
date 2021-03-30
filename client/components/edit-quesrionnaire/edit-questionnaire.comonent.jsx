@@ -13,10 +13,6 @@ class EditQuestionnaire extends React.Component{
     const questionnaire_id = this.props.match.params.id
     this.props.FetchQuestions(questionnaire_id)
   }
-  componentWillReceiveProps(){
-    console.log('fdsfs')
-    this.forceUpdate()
-  }
 
   handleQuesionComponentClick = (index) => {
     const questionsIds = this.props.questions.map(q => q.id )
