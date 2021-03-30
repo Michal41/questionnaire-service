@@ -15,8 +15,8 @@ class EditQuestionnaire extends React.Component{
   }
 
   handleQuesionComponentClick = (index) => {
-    const questionsIds = this.props.questions.map(q => q.id )
-    if (questionsIds.length === (index+1)){
+    const questions = this.props.questions.map(q => q.id )
+    if (questions.length === (index+1)){
       const questionnaire_id = this.props.match.params.id
       this.props.createQuestion(questionnaire_id);
     }

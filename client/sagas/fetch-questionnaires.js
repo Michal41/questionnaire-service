@@ -1,6 +1,5 @@
 import { put, takeEvery, call } from 'redux-saga/effects'
 import { FETCH_QUESTIONNAIRES, FETCH_QUESTIONNAIRES_SUECCES } from '../reducers/root-reducer'
-import request from 'axios';
 
 function* FetchQuestionnairesFlow() {
   try{

@@ -7,7 +7,7 @@ function* FetchQuestionsFlow(action) {
     const data = yield response.json();
     yield put(FETCH_QUESTIONS_SUECCES(data));
   }catch{
-    console.log('error while fetching quesionnaires');
+    console.log('error while fetching questions');
   }
 }
 

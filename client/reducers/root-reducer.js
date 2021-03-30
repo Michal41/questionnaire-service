@@ -24,8 +24,8 @@ function rootReducer(state = { questionnaires:[], questions:[], questionsIds: []
   switch (action.type) {
     case 'FETCH_QUESTIONNAIRES_SUECCES':
       return {...state, questionnaires: action.payload }
-    // case 'QUESTION/CREATE-QUESTION-SUCCES':
-    //   return {...state, questionsIds: [...state.questionsIds, action.payload.id]}
+    case 'QUESTION/CREATE-QUESTION-SUCCES':
+      return {...state, questions:[...state.questions, action.payload]}
     case 'QUESTIONS/FETCH_QUESTIONS_SUECCES':
       return {...state, questions:[...action.payload]}
     case 'ANSWER/HANDLE-CHANGE':

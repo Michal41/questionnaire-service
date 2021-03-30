@@ -24,8 +24,6 @@ class EditQuestion extends React.Component {
       questionId: this.props.id,
       questionnaire_id: questionnaire_id,
     };
-    console.log(body)
-
     this.props.updateQuestion(body)
   }
 
