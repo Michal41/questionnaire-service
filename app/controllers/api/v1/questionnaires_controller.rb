@@ -15,7 +15,6 @@ class Api::V1::QuestionnairesController < ApplicationController
   end
 
   def show
-
     if find_questionnaire
       render json:find_questionnaire
     else

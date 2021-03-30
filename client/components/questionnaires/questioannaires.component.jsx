@@ -21,8 +21,8 @@ const Questionnaires = ({...props}) =>{
         />
         <div className="card-body">
           <h5 className="card-title">{questionnaire.name}</h5>
-          <Link to={`/questionnaires/show/${questionnaire.id}`} className="btn custom-button">
-            View questionnaire
+          <Link to={`/questionnaires/edit/${questionnaire.id}`} className="btn custom-button">
+            edit questionnaire
           </Link>
         </div>
       </div>

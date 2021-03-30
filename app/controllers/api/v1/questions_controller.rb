@@ -29,7 +29,7 @@ class Api::V1::QuestionsController < ApplicationController
   def questions
     @questionnaire ||= Questionnaire.find(params[:questionnaire_id])
     @questions ||= @questionnaire.questions
-    return @questions if current_user.id== @questionnaire.id
+    return @questions if current_user.id == @questionnaire.user_id
   end
   def question_params
     params.require(:question).permit(:questionnaire_id, :content, :answers)

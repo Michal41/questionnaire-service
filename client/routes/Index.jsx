@@ -8,7 +8,7 @@ import EditQuestionnaire from "../components/edit-quesrionnaire/edit-questionnai
 import { Provider } from 'react-redux'
 import store from "../reducers/root-reducer";
 import NavBar from "../components/NavBar";
-
+import PublishedQuestionnaires from "../components/PublishedQuestionnaires";
 
 export default (
   <Provider store= {store}>
@@ -19,6 +19,7 @@ export default (
         <Route path="/questionnaires" exact component={Questioannaires} />
         <Route path="/questionnaires/edit/:id" exact component={EditQuestionnaire} />
         <Route path="/questionnaires/new" exact component={NewQuestionnaire} />
+        <Route path="/published/:category" exact component={PublishedQuestionnaires} />
       </Switch>
     </Router>
   </Provider>
