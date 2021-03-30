@@ -15,6 +15,7 @@ class Api::V1::QuestionnairesController < ApplicationController
   end
 
   def show
+
     if find_questionnaire
       render json:find_questionnaire
     else
@@ -25,7 +26,6 @@ class Api::V1::QuestionnairesController < ApplicationController
   def destroy
     find_questionnaire&.destroy
     render json: {message: "questionnaire deleted"}
-
   end
   private
 
@@ -35,6 +35,7 @@ class Api::V1::QuestionnairesController < ApplicationController
 
   def find_questionnaire
     @questionnaire ||= Questionnaire.find(params[:id])
+    return @questionnaire if @questionnaire.id == current_user.id
   end
 
 end
