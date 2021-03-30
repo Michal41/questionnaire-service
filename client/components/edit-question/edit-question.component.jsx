@@ -5,24 +5,8 @@ import EditQuestionAnswear from '../edit-answear/edit-answear.component';
 import { connect } from 'react-redux';
 
 class EditQuestion extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      question: props.content,
-      answers:[...props.answers]
-    }
-  }
-  // questionHandleChange = (event) => {
-  //   this.setState({
-  //     [event.target.name]:event.target.value
-  //   })
-  // }
-  // answearHandleCHange = (event,key) => {
-  //   console.log(key)
-  //   const answers = this.state.answers;
-  //   answers[key] = {id:answers[key].id, content:event.target.value}
-  //   this.setState({answers:answers})
-  // } 
+  
+
   handleAddAnswear = () => {
     const questionnaire_id = this.props.match.params.id
     const body = {
@@ -35,11 +19,13 @@ class EditQuestion extends React.Component {
   handleUpdateQuestion = () => {
     const questionnaire_id = this.props.match.params.id
     const body = {
-      content: this.props.question,
+      content: this.props.content,
       answers: this.props.answers,
       questionId: this.props.id,
       questionnaire_id: questionnaire_id,
     };
+    console.log(body)
+
     this.props.updateQuestion(body)
   }
 
