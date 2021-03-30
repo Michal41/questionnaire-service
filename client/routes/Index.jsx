@@ -7,11 +7,13 @@ import NewQuestionnaire from "../components/new-questionnaire/new-questionnaire.
 import EditQuestionnaire from "../components/edit-quesrionnaire/edit-questionnaire.comonent";
 import { Provider } from 'react-redux'
 import store from "../reducers/root-reducer";
+import NavBar from "../components/NavBar";
 
 
 export default (
   <Provider store= {store}>
     <Router>
+    <NavBar />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/questionnaires" exact component={Questioannaires} />

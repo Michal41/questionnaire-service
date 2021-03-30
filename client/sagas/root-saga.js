@@ -5,6 +5,7 @@ import CreateQuestionnaire from './create-questionnaire'
 import UpdateQuestion from './update-question'
 import FetchQuestions from './fetch-questions'
 import CreateAnswer from './create-answer'
+import Logout from './logout'
 
 export default function* rootSaga() {
   yield all([
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     UpdateQuestion(),
     CreateAnswer(),
     FetchQuestions(),
+    Logout(),
   ])
 }
