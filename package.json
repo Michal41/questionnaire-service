@@ -10,6 +10,7 @@
     "axios": "^0.21.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.5.3",
+    "eslint-config-airbnb": "^18.2.1",
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
@@ -27,6 +28,8 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-plugin-react": "^7.23.1",
     "webpack-dev-server": "^3.11.0"
   }
 }
