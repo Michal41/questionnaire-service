@@ -6,10 +6,10 @@ import { FETCH_QUESTIONNAIRES } from '../../reducers/root-reducer';
 
 
 const Questionnaires = ({...props}) =>{
-  useEffect(() => { 
+  useEffect(() => {
     props.fetchQuestionnaires()
    }, []);
-  
+
   const { questionnaires } = props;
   const allquestionnaires = questionnaires.map((questionnaire, index) => (
     <div key={index} className="col-md-6 col-lg-4">
@@ -41,7 +41,7 @@ const Questionnaires = ({...props}) =>{
         <div className="container py-5">
           <h1 className="display-4">Questionnaires list</h1>
           <p className="lead text-muted">
-          Together we will solve the age-old questionnaire problem. 
+          Together we will solve the age-old questionnaire problem.
           upload in your questionnaire and solve another's one poll
           </p>
         </div>
