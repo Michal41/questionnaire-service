@@ -1,11 +1,12 @@
 class Api::V1::QuestionnairesController < ApplicationController
+  protect_from_forgery except: %i[create publish]
   def index
     questionnaires = current_user.questionnaires
-    render json:questionnaires
+    render json: questionnaires
   end
 
   def create
-    questionnaire=current_user.questionnaires.create(questionnaire_params)
+    questionnaire = current_user.questionnaires.create(questionnaire_params)
     if questionnaire
       questionnaire.questions.create
       render json:questionnaire
@@ -22,10 +23,21 @@ class Api::V1::QuestionnairesController < ApplicationController
     end
   end
 
+  def publish
+    questionnaire = Questionnaire.find(params[:questionnaire_id])
+    questionnaire.assign_attributes(status: 'published')
+    if questionnaire.save
+      render json: questionnaire
+    else
+      render json: questionnaire.errors
+    end
+  end
+
   def destroy
     find_questionnaire&.destroy
     render json: {message: "questionnaire deleted"}
   end
+
   private
 
   def questionnaire_params
