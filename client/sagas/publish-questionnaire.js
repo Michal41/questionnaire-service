@@ -1,5 +1,5 @@
 import { put, takeEvery, call, delay } from 'redux-saga/effects'
-import { PUBLISH_QUESTIONNAIRE } from '../reducers/root-reducer'
+import { FETCH_QUESTIONNAIRES, PUBLISH_QUESTIONNAIRE } from '../reducers/root-reducer'
 import headers from '../utilis/apiHeader';
 
 const fetchFunc = ({ url, options }) => {
@@ -18,8 +18,7 @@ function* PublishQuestionnaireFlow(action) {
         body : JSON.stringify(""),
       }
     });
-    const data = yield response.json();
-    console.log(data)
+    yield put(FETCH_QUESTIONNAIRES());
   }
 }
 

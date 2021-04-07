@@ -10,8 +10,11 @@ const Questionnaires = ({...props}) =>{
    }, []);
 
   const { questionnaires } = props;
-  const allquestionnaires = questionnaires.map((questionnaire, index) => (
-    <div key={index} className="col-md-6 col-lg-4">
+  if (questionnaires[0]) {
+    console.log(questionnaires[0].status=='draft' ? '': 'disabled')
+  }
+  const allquestionnaires = questionnaires.map((questionnaire) => (
+    <div key={questionnaire.id} className="col-md-6 col-lg-4">
       <div className="card mb-4">
         <img
           src={require('../../assets/questionnaire.jpg')}
@@ -24,7 +27,7 @@ const Questionnaires = ({...props}) =>{
             edit questionnaire
           </Link>
           <button
-            className="btn custom-button mt2"
+            className={`btn custom-button mt2 ${questionnaire.status==='published' ? 'disabled' : ''}`}
             onClick={()=>props.publishQuestionnaire(questionnaire.id)}
           >
               publish questionnaire

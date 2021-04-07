@@ -35,9 +35,6 @@ function rootReducer(state = { questionnaires:[], questions:[], questionsIds: []
       return handleAnswerChange(state, action.payload)
     case 'QUESTION/HANDLE-CHANGE':
       return handleQuestionChange(state, action.payload)
-    case 'QUESTIONNAIRE/PUBLISH':
-      console.log('log from  reducer')
-      return {...state}
     case 'USER/LOGOUT-SUCCES':
       console.log('logout')
       return {...state, logout: true}

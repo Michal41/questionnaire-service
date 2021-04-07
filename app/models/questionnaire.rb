@@ -3,5 +3,5 @@ class Questionnaire < ApplicationRecord
   has_many :questions, dependent: :destroy
   validates :name, presence: true
 
-  enum status: %i[dfaft published archive]
+  enum status: %i[draft published archive]
 end
