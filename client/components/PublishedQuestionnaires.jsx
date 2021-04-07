@@ -12,7 +12,7 @@ const PublishedQuestionnaires = (props) => {
     props.fetchQuestionnaires();
    }, []);
 
-  const questionnaires =[{name: 'name', id: "2"}, {name: 'names', id: "22"}]
+  const { questionnaires } = props;
   const allquestionnaires = questionnaires.map((questionnaire) => (
     <div key={questionnaire.id} className="col-md-6 col-lg-4">
       <div className="card mb-4">

@@ -5,7 +5,6 @@ function* FetchQuestionnairesFlow() {
   try{
     const response = yield call(fetch, '/api/v1//questionnaires/show_published')
     const data = yield response.json();
-    console.log(data)
     yield put(FETCH_QUESTIONNAIRES_SUECCES(data));
   }catch{
     console.log('error while fetching quesionnaires');
