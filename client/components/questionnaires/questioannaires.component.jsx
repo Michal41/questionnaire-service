@@ -2,8 +2,7 @@ import React from 'react';
 import {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
-import { FETCH_QUESTIONNAIRES } from '../../reducers/root-reducer';
-
+import { FETCH_QUESTIONNAIRES, PUBLISH_QUESTIONNAIRE } from '../../reducers/root-reducer';
 
 const Questionnaires = ({...props}) =>{
   useEffect(() => {
@@ -19,11 +18,17 @@ const Questionnaires = ({...props}) =>{
           className="card-img-top"
           alt={`${questionnaire.name} image`}
         />
-        <div className="card-body">
+        <div className="card-body tc">
           <h5 className="card-title">{questionnaire.name}</h5>
           <Link to={`/questionnaires/edit/${questionnaire.id}`} className="btn custom-button">
             edit questionnaire
           </Link>
+          <button
+            className="btn custom-button mt2"
+            onClick={()=>props.publishQuestionnaire(questionnaire.id)}
+          >
+              publish questionnaire
+          </button>
         </div>
       </div>
     </div>
@@ -68,7 +73,9 @@ const Questionnaires = ({...props}) =>{
 const mapStateToProps = state => ({ value: state.value, questionnaires: state.questionnaires })
 const mapDispatchToProps = dispatch => {
   return {
-    fetchQuestionnaires: id => dispatch(FETCH_QUESTIONNAIRES(id))
+    fetchQuestionnaires: () => dispatch(FETCH_QUESTIONNAIRES()),
+    publishQuestionnaire: id => dispatch(PUBLISH_QUESTIONNAIRE(id)),
+
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Questionnaires)

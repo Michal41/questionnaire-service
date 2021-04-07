@@ -18,6 +18,7 @@ export const HANDLE_ANSWER_CHANGE = createAction('ANSWER/HANDLE-CHANGE');
 export const HANDLE_QUESTION_CHANGE = createAction('QUESTION/HANDLE-CHANGE');
 export const LOGOUT = createAction('USER/LOGOUT');
 export const LOGOUT_SUCCES = createAction('USER/LOGOUT-SUCCES');
+export const PUBLISH_QUESTIONNAIRE = createAction('QUESTIONNAIRE/PUBLISH');
 
 
 
@@ -34,6 +35,9 @@ function rootReducer(state = { questionnaires:[], questions:[], questionsIds: []
       return handleAnswerChange(state, action.payload)
     case 'QUESTION/HANDLE-CHANGE':
       return handleQuestionChange(state, action.payload)
+    case 'QUESTIONNAIRE/PUBLISH':
+      console.log('log from  reducer')
+      return {...state}
     case 'USER/LOGOUT-SUCCES':
       console.log('logout')
       return {...state, logout: true}

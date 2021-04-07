@@ -9,9 +9,9 @@ class Api::V1::QuestionnairesController < ApplicationController
     questionnaire = current_user.questionnaires.create(questionnaire_params)
     if questionnaire
       questionnaire.questions.create
-      render json:questionnaire
+      render json: questionnaire
     else
-      render json:questionnaire.errors
+      render json: questionnaire.errors
     end
   end
 
