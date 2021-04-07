@@ -1,5 +1,5 @@
 class Api::V1::QuestionnairesController < ApplicationController
-  protect_from_forgery except: %i[create publish]
+  protect_from_forgery except: %i[create]
   def index
     questionnaires = current_user.questionnaires
     render json: questionnaires
@@ -17,9 +17,9 @@ class Api::V1::QuestionnairesController < ApplicationController
 
   def show
     if find_questionnaire
-      render json:find_questionnaire
+      render json: find_questionnaire
     else
-      render json:find_questionnaire.errors
+      render json: find_questionnaire.errors
     end
   end
 
@@ -36,6 +36,13 @@ class Api::V1::QuestionnairesController < ApplicationController
   def destroy
     find_questionnaire&.destroy
     render json: {message: "questionnaire deleted"}
+  end
+
+  def show_published
+    questionnaires = Questionnaire.where(status: 'published')
+    return if questionnaires.nil?
+
+    render json: questionnaires
   end
 
   private

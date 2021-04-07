@@ -7,6 +7,9 @@ Rails.application.routes.draw do
           resources :answers
         end
         put 'publish_questionnaire', to: 'questionnaires#publish'
+        collection do
+          get 'show_published', to: 'questionnaires#show_published'
+        end
       end
     end
   end

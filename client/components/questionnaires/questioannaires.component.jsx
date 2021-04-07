@@ -10,9 +10,6 @@ const Questionnaires = ({...props}) =>{
    }, []);
 
   const { questionnaires } = props;
-  if (questionnaires[0]) {
-    console.log(questionnaires[0].status=='draft' ? '': 'disabled')
-  }
   const allquestionnaires = questionnaires.map((questionnaire) => (
     <div key={questionnaire.id} className="col-md-6 col-lg-4">
       <div className="card mb-4">
