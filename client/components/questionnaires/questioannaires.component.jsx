@@ -2,28 +2,33 @@ import React from 'react';
 import {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
-import { FETCH_QUESTIONNAIRES } from '../../reducers/root-reducer';
-
+import { FETCH_QUESTIONNAIRES, PUBLISH_QUESTIONNAIRE } from '../../reducers/root-reducer';
 
 const Questionnaires = ({...props}) =>{
-  useEffect(() => { 
+  useEffect(() => {
     props.fetchQuestionnaires()
    }, []);
-  
+
   const { questionnaires } = props;
-  const allquestionnaires = questionnaires.map((questionnaire, index) => (
-    <div key={index} className="col-md-6 col-lg-4">
+  const allquestionnaires = questionnaires.map((questionnaire) => (
+    <div key={questionnaire.id} className="col-md-6 col-lg-4">
       <div className="card mb-4">
         <img
           src={require('../../assets/questionnaire.jpg')}
           className="card-img-top"
           alt={`${questionnaire.name} image`}
         />
-        <div className="card-body">
+        <div className="card-body tc">
           <h5 className="card-title">{questionnaire.name}</h5>
-          <Link to={`/questionnaires/show/${questionnaire.id}`} className="btn custom-button">
-            View questionnaire
+          <Link to={`/questionnaires/edit/${questionnaire.id}`} className="btn custom-button">
+            edit questionnaire
           </Link>
+          <button
+            className={`btn custom-button mt2 ${questionnaire.status==='published' ? 'disabled' : ''}`}
+            onClick={()=>props.publishQuestionnaire(questionnaire.id)}
+          >
+              publish questionnaire
+          </button>
         </div>
       </div>
     </div>
@@ -41,7 +46,7 @@ const Questionnaires = ({...props}) =>{
         <div className="container py-5">
           <h1 className="display-4">Questionnaires list</h1>
           <p className="lead text-muted">
-          Together we will solve the age-old questionnaire problem. 
+          Together we will solve the age-old questionnaire problem.
           upload in your questionnaire and solve another's one poll
           </p>
         </div>
@@ -68,7 +73,9 @@ const Questionnaires = ({...props}) =>{
 const mapStateToProps = state => ({ value: state.value, questionnaires: state.questionnaires })
 const mapDispatchToProps = dispatch => {
   return {
-    fetchQuestionnaires: id => dispatch(FETCH_QUESTIONNAIRES(id))
+    fetchQuestionnaires: () => dispatch(FETCH_QUESTIONNAIRES()),
+    publishQuestionnaire: id => dispatch(PUBLISH_QUESTIONNAIRE(id)),
+
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Questionnaires)

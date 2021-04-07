@@ -1,25 +1,35 @@
 class Api::V1::QuestionnairesController < ApplicationController
+  protect_from_forgery except: %i[create]
   def index
     questionnaires = current_user.questionnaires
-    render json:questionnaires
+    render json: questionnaires
   end
 
   def create
-    questionnaire=current_user.questionnaires.create(questionnaire_params)
+    questionnaire = current_user.questionnaires.create(questionnaire_params)
     if questionnaire
       questionnaire.questions.create
-      render json:questionnaire
+      render json: questionnaire
     else
-      render json:questionnaire.errors
+      render json: questionnaire.errors
     end
   end
 
   def show
-
     if find_questionnaire
-      render json:find_questionnaire
+      render json: find_questionnaire
     else
-      render json:find_questionnaire.errors
+      render json: find_questionnaire.errors
+    end
+  end
+
+  def publish
+    questionnaire = Questionnaire.find(params[:questionnaire_id])
+    questionnaire.assign_attributes(status: 'published')
+    if questionnaire.save
+      render json: questionnaire
+    else
+      render json: questionnaire.errors
     end
   end
 
@@ -27,6 +37,14 @@ class Api::V1::QuestionnairesController < ApplicationController
     find_questionnaire&.destroy
     render json: {message: "questionnaire deleted"}
   end
+
+  def show_published
+    questionnaires = Questionnaire.where(status: 'published')
+    return if questionnaires.nil?
+
+    render json: questionnaires
+  end
+
   private
 
   def questionnaire_params

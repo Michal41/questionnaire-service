@@ -1,10 +1,10 @@
 class Api::V1::QuestionsController < ApplicationController
   protect_from_forgery except: :create
-  
+
   def index
     render json: questions
   end
-  
+
   def create
     question = Question.create(question_params)
     render :json => question
@@ -20,7 +20,7 @@ class Api::V1::QuestionsController < ApplicationController
     if question.update(question_params)
       render :json => question
     else
-      render json: question.error, status: :unprocessable_entity 
+      render json: question.error, status: :unprocessable_entity
     end
   end
 
@@ -29,8 +29,9 @@ class Api::V1::QuestionsController < ApplicationController
   def questions
     @questionnaire ||= Questionnaire.find(params[:questionnaire_id])
     @questions ||= @questionnaire.questions
-    return @questions if current_user.id== @questionnaire.id
+    return @questions if current_user.id == @questionnaire.user_id
   end
+
   def question_params
     params.require(:question).permit(:questionnaire_id, :content, :answers)
   end
