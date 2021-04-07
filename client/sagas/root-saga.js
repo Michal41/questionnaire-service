@@ -7,6 +7,8 @@ import FetchQuestions from './fetch-questions'
 import CreateAnswer from './create-answer'
 import Logout from './logout'
 import PublishQuestionnaire from './publish-questionnaire'
+import FetchPublishedQuestionnaires from './fetch-published-questionnaires'
+
 
 export default function* rootSaga() {
   yield all([
@@ -18,5 +20,6 @@ export default function* rootSaga() {
     FetchQuestions(),
     Logout(),
     PublishQuestionnaire(),
+    FetchPublishedQuestionnaires(),
   ])
 }

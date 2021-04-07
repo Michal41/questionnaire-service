@@ -1,7 +1,17 @@
 import React from 'react'
 import {Link} from "react-router-dom";
+import { connect } from 'react-redux';
+import {useEffect} from 'react';
+import { FETCH_PUBLISHED_QUESTIONNAIRES } from '../reducers/root-reducer';
 
-const PublishedQuestionnaires = () => {
+
+
+const PublishedQuestionnaires = (props) => {
+
+  useEffect(() => {
+    props.fetchQuestionnaires();
+   }, []);
+
   const questionnaires =[{name: 'name', id: "2"}, {name: 'names', id: "22"}]
   const allquestionnaires = questionnaires.map((questionnaire) => (
     <div key={questionnaire.id} className="col-md-6 col-lg-4">
@@ -42,4 +52,13 @@ const PublishedQuestionnaires = () => {
   );
 };
 
-export default PublishedQuestionnaires;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchQuestionnaires: () => dispatch(FETCH_PUBLISHED_QUESTIONNAIRES()),
+  }
+}
+const mapStateToProps = state => {
+  return {questionnaires: state.questionnaires}
+}
+export default connect(mapStateToProps,mapDispatchToProps)(PublishedQuestionnaires);

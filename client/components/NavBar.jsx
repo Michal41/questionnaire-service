@@ -21,6 +21,9 @@ const NavBar = (props) => {
           <Link to="/" className="btn custom-button">
               Home
           </Link>
+          <Link to="/published/all" className="ml1 btn custom-button">
+              published
+          </Link>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active">
