@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom";
 import { connect } from 'react-redux';
 import {useEffect} from 'react';
-import { FETCH_PUBLISHED_QUESTIONNAIRES } from '../reducers/root-reducer';
+import  {FETCH_PUBLISHED_QUESTIONNAIRES, CREATE_COMPLETED_QUESTIONNAIRE } from '../reducers/root-reducer';
 
 
 
@@ -12,7 +12,7 @@ const PublishedQuestionnaires = (props) => {
     props.fetchQuestionnaires();
    }, []);
 
-  const { questionnaires } = props;
+  const { questionnaires, createFiledQuestionnaires } = props;
   const allquestionnaires = questionnaires.map((questionnaire) => (
     <div key={questionnaire.id} className="col-md-6 col-lg-4">
       <div className="card mb-4">
@@ -23,9 +23,9 @@ const PublishedQuestionnaires = (props) => {
         />
         <div className="card-body">
           <h5 className="card-title">{questionnaire.name}</h5>
-          <Link to={`/questionnaires/fill/${questionnaire.id}`} className="btn custom-button">
+          <button onClick={() => createFiledQuestionnaires({ questionnaireId: questionnaire.id })} className="btn custom-button">
             Fill questionnaire
-          </Link>
+          </button>
         </div>
       </div>
     </div>
@@ -56,6 +56,7 @@ const PublishedQuestionnaires = (props) => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchQuestionnaires: () => dispatch(FETCH_PUBLISHED_QUESTIONNAIRES()),
+    createFiledQuestionnaires: (questionnaireId) => dispatch(CREATE_COMPLETED_QUESTIONNAIRE(questionnaireId)),
   }
 }
 const mapStateToProps = state => {
