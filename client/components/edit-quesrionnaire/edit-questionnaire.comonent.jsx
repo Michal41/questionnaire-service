@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import { CREATE_QUESTION, FETCH_QUESTIONS } from '../../reducers/root-reducer';
 
 const EditQuestionnaire = (props) => {
-  useEffect(() => { 
+  useEffect(() => {
     const questionnaire_id = props.match.params.id;
     props.FetchQuestions(questionnaire_id)
    }, []);
@@ -25,10 +25,10 @@ const EditQuestionnaire = (props) => {
             <h1 className="display-4">Your Questionnaire</h1>
           </div>
     </section>
-    <div className="center w-60">      
+    <div className="center w-60">
       {sortedQuestions.map( (item,index) => (
-        <EditQuestion 
-          handleQuesionComponentClick={handleQuesionComponentClick} 
+        <EditQuestion
+          handleQuesionComponentClick={handleQuesionComponentClick}
           index={index}
           key={item.id}
           id={item.id}
