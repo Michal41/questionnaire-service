@@ -5,6 +5,13 @@ class Api::V1::CompletedQuestionnairesController < ApplicationController
     render json: completed_questionnaires
   end
 
+  def show
+    questions = CompletedQuestionnaire.find(params[:id]).questionnaire.questions
+    return unless questions
+
+    render json: questions
+  end
+
   def completed_questionnaire_params
     params.require(:completed_questionnaire).permit(:questionnaire_id)
   end

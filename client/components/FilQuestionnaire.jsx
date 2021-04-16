@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from "react-router-dom";
+import { connect } from 'react-redux'
+import { FETCH_COMPLETED_QUESTIONNAIRE_QUESTIONS } from '../reducers/root-reducer';
 
-const FilQuestionnaire = () => {
+const FilQuestionnaire = (props) => {
+  const params = useParams();
+  const completedQuestionnaireId = params.id;
+  const { fetchQuestions, questions } = props;
+  useEffect( () =>{
+    fetchQuestions(completedQuestionnaireId)
+  }, [] )
+  console.log(questions)
   return (
     <div
       className="w-80 bg-light-green2 bt bw3 border-dark-green2 mt4 center"
@@ -26,4 +36,16 @@ const FilQuestionnaire = () => {
   );
 };
 
-export default FilQuestionnaire;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchQuestions: (completedQuestionnaireId) => dispatch(FETCH_COMPLETED_QUESTIONNAIRE_QUESTIONS(completedQuestionnaireId))
+  };
+};
+
+const mapStateToProps = state => {
+  return{
+    questions: state.questions,
+  };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(FilQuestionnaire);

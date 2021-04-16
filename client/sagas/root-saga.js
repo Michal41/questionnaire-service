@@ -9,6 +9,7 @@ import Logout from './logout'
 import PublishQuestionnaire from './publish-questionnaire'
 import FetchPublishedQuestionnaires from './fetch-published-questionnaires'
 import CreateCompletedQuestionnaire from './create-completed-questionnaire'
+import FetchCompetedQuestionnaireQuestions from './feetch-completed-questionnaire-questions'
 
 export default function* rootSaga() {
   yield all([
@@ -22,5 +23,6 @@ export default function* rootSaga() {
     PublishQuestionnaire(),
     FetchPublishedQuestionnaires(),
     CreateCompletedQuestionnaire(),
+    FetchCompetedQuestionnaireQuestions(),
   ])
 }

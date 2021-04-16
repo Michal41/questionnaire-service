@@ -21,6 +21,7 @@ export const LOGOUT_SUCCES = createAction('USER/LOGOUT-SUCCES');
 export const PUBLISH_QUESTIONNAIRE = createAction('QUESTIONNAIRE/PUBLISH');
 export const FETCH_PUBLISHED_QUESTIONNAIRES = createAction('QUESTIONNAIRES/FETCH_PUBLISHED_QUESTIONNAIRES');
 export const CREATE_COMPLETED_QUESTIONNAIRE = createAction('COMPLETED_QUESTIONNAIRES/CREATE_COMPLETED_QUESTIONNAIRE');
+export const FETCH_COMPLETED_QUESTIONNAIRE_QUESTIONS = createAction('COMPLETED_QUESTIONNAIRES/FETCH_QUESTIONS');
 
 
 
@@ -33,6 +34,7 @@ function rootReducer(state = { questionnaires:[], questions:[], questionsIds: []
     case 'QUESTION/CREATE-QUESTION-SUCCES':
       return {...state, questions:[...state.questions, action.payload]}
     case 'QUESTIONS/FETCH_QUESTIONS_SUECCES':
+      console.log({...state, questions:[...action.payload]})
       return {...state, questions:[...action.payload]}
     case 'ANSWER/HANDLE-CHANGE':
       return handleAnswerChange(state, action.payload)

@@ -8,9 +8,8 @@ const fetchFunc = ({ url, options }) => {
 
 function* PublishQuestionnaireFlow(action) {
   if (action.payload) {
-    console.log(action.payload)
     const url = `/api/v1/questionnaires/${action.payload}/publish_questionnaire`;
-    const response = yield call(fetchFunc, {
+    yield call(fetchFunc, {
       url: url,
       options : {
         method : 'PUT',
