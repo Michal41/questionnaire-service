@@ -25,6 +25,8 @@ const FilQuestionnaire = (props) => {
       {filteredQuestions.map( (question) => (
         <FillQuestion highlightAnswers={highlightAnswers} key={question.id} question={question} handleAnswerClick={handleAnswerClick}  />
       ))}
+
+      <div className="w-100 tc mt5"><button onClick={() => console.log('save ansvers')} className='f1 btn custom-button w-30'> Save </button></div>
     </div>
   );
 };
