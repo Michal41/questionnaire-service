@@ -36,7 +36,6 @@ function rootReducer(state = { questionnaires:[], questions:[], questionsIds: []
     case 'QUESTION/CREATE-QUESTION-SUCCES':
       return {...state, questions:[...state.questions, action.payload]}
     case 'QUESTIONS/FETCH_QUESTIONS_SUECCES':
-      console.log({...state, questions:[...action.payload]})
       return {...state, questions:[...action.payload]}
     case 'ANSWER/HANDLE-CHANGE':
       return handleAnswerChange(state, action.payload)
@@ -44,9 +43,6 @@ function rootReducer(state = { questionnaires:[], questions:[], questionsIds: []
       return handleQuestionChange(state, action.payload)
     case 'USER/LOGOUT-SUCCES':
       return {...state, logout: true}
-    case 'COMPLETED_QUESTIONNAIRES/SAVE_QUESTIONS':
-      console.log('reducer log')
-      return {...state}
     case 'ANSWER/CREATE-ANSWER_SUCCES':
       const anotherQuestions = state.questions.filter(question => question.id!=action.payload.question.id)
       const question = state.questions.filter(question => question.id==action.payload.question.id)
