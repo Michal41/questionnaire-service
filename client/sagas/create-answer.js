@@ -1,8 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects'
-import { CREATE_ANSWER, CREATE_ANSWER_SUCCES, FETCH_QUESTIONS } from '../reducers/root-reducer'
+import { CREATE_ANSWER, CREATE_ANSWER_SUCCES } from '../reducers/root-reducer'
 import headers from '../utilis/apiHeader';
-import FetchQuestions from './fetch-questions';
-FetchQuestions
 
 const fetchFunc = ({ url, options }) => {
   return fetch(url, options);
@@ -20,8 +18,6 @@ function* CreateAnswerFlow(action) {
    }
   });
   const data = yield response.json();
-
-  //yield put(FETCH_QUESTIONS(2));
   yield put(CREATE_ANSWER_SUCCES(data));
 }
 
