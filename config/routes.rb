@@ -11,7 +11,9 @@ Rails.application.routes.draw do
           get 'show_published', to: 'questionnaires#show_published'
         end
       end
-      resources :completed_questionnaires
+      resources :completed_questionnaires do
+        resources :completed_questions
+      end
     end
   end
   root to:'homepage#index'
