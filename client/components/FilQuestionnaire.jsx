@@ -1,37 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { connect } from 'react-redux'
 import { FETCH_COMPLETED_QUESTIONNAIRE_QUESTIONS } from '../reducers/root-reducer';
+import FillQuestion from './FillQuesion';
 
 const FilQuestionnaire = (props) => {
   const params = useParams();
   const completedQuestionnaireId = params.id;
+  const [filedQuestions, setFiledQuestions] = useState([]);
   const { fetchQuestions, questions } = props;
+  const filteredQuestions = questions.filter( question => question.content!='')
+
   useEffect( () =>{
     fetchQuestions(completedQuestionnaireId)
   }, [] )
-  console.log(questions)
+
+  const handleAnswerClick = (answerId, questionId) => {
+    const anotherQuestions = filedQuestions.filter( item => item.questionId!==questionId )
+    setFiledQuestions([...anotherQuestions, {questionId, answerId}])
+  }
+  const highlightAnswers = filedQuestions.map(question => question.answerId)
   return (
-    <div
-      className="w-80 bg-light-green2 bt bw3 border-dark-green2 mt4 center"
-    >
-      <div className="fl f5 code pa2 tr pl2 mt3">
-        2
-      </div>
-      <div className="fl w-100 h1 mt1"></div>
-      <div className="fl pr4 pl2 h2 f4 gray pointer">
-        &#9675;
-      </div>
-        <div className="fl w-80">
-          <div
-            className="w-100 h foucs-border-green border shadow-2 pointer pa2"
-        >
-            2
-        </div>
-      </div>
-      <div className="db fl w-10 h2">
-        &nbsp;
-      </div>
+    <div>
+      {filteredQuestions.map( (question) => (
+        <FillQuestion highlightAnswers={highlightAnswers} key={question.id} question={question} handleAnswerClick={handleAnswerClick}  />
+      ))}
     </div>
   );
 };
